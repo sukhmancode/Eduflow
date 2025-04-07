@@ -78,6 +78,3 @@ export default function page() {
     </>
   );
 }
-function setCollegeName(Colname: any) {
-  throw new Error("Function not implemented.");
-}

@@ -13,6 +13,14 @@ export const SideBarData: LinkArray[] = [
     value: "Add Teacher",
   },
   {
+    href: "/dashboard/college/searchstudent",
+    value: "Search Student",
+  },
+  {
+    href: "/dashboard/college/searchteacher",
+    value: "Search Teacher",
+  },
+  {
     href: "/dashboard/colleges/addstudent",
     value: "Add Student",
   },
@@ -32,8 +40,4 @@ export const SideBarData: LinkArray[] = [
     href: "/dashboard/colleges/noticeposting",
     value: "Post Notice",
   },
-  // {
-  //   href: "/dashboard/college/enroll",
-  //   value: "Enroll Students",
-  // },
 ];
