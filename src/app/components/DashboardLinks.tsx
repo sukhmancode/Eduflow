@@ -67,11 +67,7 @@ export const teacherLinks: NavProps[] = [
   },
   {
     id: 0,
-<<<<<<< HEAD
     name: "Upload Assignment",
-=======
-    name: "Upload Assignments",
->>>>>>> refs/remotes/origin/master
     href: "/dashboard/teacher/assignments",
     icon: FilePlus, // 📝 Assignment Upload Icon
   },
