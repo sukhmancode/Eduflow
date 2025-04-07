@@ -40,7 +40,7 @@ export default function LandingPage() {
         
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="w-full  bg-muted">
+        <section id="how-it-works" className="w-full  bg-muted py-7">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -175,13 +175,6 @@ export default function LandingPage() {
           </p>
         </div>
         <div className="flex items-center gap-4 pt-4">
-          <Image
-            src="/placeholder.svg?height=40&width=40"
-            alt="Student"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
           <div>
             <p className="font-medium">Taranvir Kaur</p>
             <p className="text-sm text-muted-foreground">Computer Science, Senior</p>
@@ -195,13 +188,6 @@ export default function LandingPage() {
           </p>
         </div>
         <div className="flex items-center gap-4 pt-4">
-          <Image
-            src="/placeholder.svg?height=40&width=40"
-            alt="Student"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
           <div>
             <p className="font-medium">Ravjot Singh</p>
             <p className="text-sm text-muted-foreground">Business Administration, Junior</p>
@@ -257,8 +243,6 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
-
-       
       </main>
 
       <footer className="w-full border-t bg-background py-6 md:py-10">
