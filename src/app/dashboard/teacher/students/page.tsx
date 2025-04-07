@@ -31,7 +31,6 @@ export default function StudentAssignments() {
 
     const fetchStudents = async () => {
       try {
-        // Step 1: Get teacher's classes
         const classRes = await axios.get(
           `https://ai-teacher-api-xnd1.onrender.com/teacher/${teacherID}/classes`
         );
@@ -47,7 +46,7 @@ export default function StudentAssignments() {
         const studentRes = await axios.get(
           `https://ai-teacher-api-xnd1.onrender.com/teacher/viewstudents/${teacherID}`
         );
-
+        console.log(studentRes, classRes);
         setStudents(studentRes.data);
       } catch (error) {
         console.error("Error fetching student data", error);
@@ -81,14 +80,18 @@ export default function StudentAssignments() {
                         className="text-sm p-2 rounded bg-gray-700 text-secondary"
                       >
                         <div className="flex justify-between items-center">
-                          <span className="font-semibold">{assignment.title}</span>
+                          <span className="font-semibold">
+                            {assignment.title}
+                          </span>
                           <span>Grade: {assignment.grade}</span>
                         </div>
                         {assignment.Submitted_At ? (
                           <>
                             <p className="text-xs text-green-300 mt-1">
                               Submitted At:{" "}
-                              {new Date(assignment.Submitted_At).toLocaleString()}
+                              {new Date(
+                                assignment.Submitted_At
+                              ).toLocaleString()}
                             </p>
                             {assignment.url && (
                               <a
