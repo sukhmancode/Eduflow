@@ -67,7 +67,7 @@ export const teacherLinks: NavProps[] = [
   },
   {
     id: 0,
-    name: "Upload Notice",
+    name: "Upload Assignments",
     href: "/dashboard/teacher/assignments",
     icon: FilePlus, // 📝 Assignment Upload Icon
   },
