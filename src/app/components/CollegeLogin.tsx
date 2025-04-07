@@ -27,7 +27,7 @@ export function CollegeLogin() {
       if (response.data.Message === "Success Login") {
         sessionStorage.setItem("collegeId", response.data.ID);
         toast.success("College Login Successful");
-        window.location.href = "/dashboard/college"; 
+        window.location.href = "/dashboard/colleges"; 
       } else {
         toast.error("Please check your credentials");
       }

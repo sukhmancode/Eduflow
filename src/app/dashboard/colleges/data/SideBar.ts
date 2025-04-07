@@ -5,28 +5,32 @@ export interface LinkArray {
 
 export const SideBarData: LinkArray[] = [
   {
-    href: "/dashboard/college/",
+    href: "/dashboard/colleges/",
     value: "Home",
   },
   {
-    href: "/dashboard/college/addteacher",
+    href: "/dashboard/colleges/addteacher",
     value: "Add Teacher",
   },
   {
-    href: "/dashboard/college/addstudent",
+    href: "/dashboard/colleges/addstudent",
     value: "Add Student",
   },
   {
-    href: "/dashboard/college/viewclasses",
+    href: "/dashboard/colleges/viewclasses",
     value: "View Classes",
   },
   {
-    href: "/dashboard/college/viewdetails",
+    href: "/dashboard/colleges/viewdetails",
     value: "View Details",
   },
   {
-    href: "/dashboard/college/viewteachers",
+    href: "/dashboard/colleges/viewteachers",
     value: "View Teachers",
+  },
+  {
+    href: "/dashboard/colleges/noticeposting",
+    value: "Post Notice",
   },
   // {
   //   href: "/dashboard/college/enroll",
