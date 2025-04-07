@@ -109,6 +109,12 @@ export const teacherLinks: NavProps[] = [
     href: "/dashboard/teacher/sendemail",
     icon: MessageCircle, // 📊 Reports Icon
   },
+  {
+    id: 5,
+    name: "Generate certificate",
+    href: "/dashboard/teacher/addcertificate",
+    icon: MessageCircle, // 📊 Reports Icon
+  },
 ];
 
 interface DashboardLinksProps {
