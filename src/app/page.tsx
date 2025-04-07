@@ -8,11 +8,11 @@ import { LoginDialog } from "./components/LoginPopup"
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky p-2 top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <GraduationCap className="h-6 w-6" />
-            <span className="text-xl font-bold">StudentHub</span>
+            <span className="text-xl font-bold">EduFlow</span>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <Link href="#features" className="font-medium transition-colors hover:text-primary">
@@ -158,62 +158,61 @@ export default function LandingPage() {
 
         {/* Testimonials Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Testimonials</div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">What Students Say</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Hear from students who have transformed their academic tracking with our platform.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-2">
-              <div className="flex flex-col justify-between rounded-lg border bg-background p-6 shadow-sm">
-                <div className="space-y-4">
-                  <p className="text-muted-foreground">
-                    "This platform has completely changed how I track my college activities. Having everything in one
-                    place made creating my resume so much easier!"
-                  </p>
-                </div>
-                <div className="flex items-center gap-4 pt-4">
-                  <Image
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="Student"
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                  <div>
-                    <p className="font-medium">Sarah Johnson</p>
-                    <p className="text-sm text-muted-foreground">Computer Science, Senior</p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col justify-between rounded-lg border bg-background p-6 shadow-sm">
-                <div className="space-y-4">
-                  <p className="text-muted-foreground">
-                    "I used to lose track of my extracurricular certificates. Now I can upload them immediately and
-                    access them whenever I need them."
-                  </p>
-                </div>
-                <div className="flex items-center gap-4 pt-4">
-                  <Image
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="Student"
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
-                  <div>
-                    <p className="font-medium">Michael Chen</p>
-                    <p className="text-sm text-muted-foreground">Business Administration, Junior</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div className="container px-4 md:px-6">
+    <div className="flex flex-col items-center justify-center space-y-4 text-center">
+      <div className="space-y-2">
+        <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Students of GNDEC</div>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">What Students Say</h2>
+        <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          Hear from students who have transformed their academic tracking with our platform.
+        </p>
+      </div>
+    </div>
+    <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-2">
+      <div className="flex flex-col justify-between rounded-lg border bg-background p-6 shadow-sm">
+        <div className="space-y-4">
+          <p className="text-muted-foreground text-2xl">
+            "ਇਹ ਪਲੇਟਫਾਰਮ ਮੇਰੇ ਕਾਲਜ ਦੀਆਂ ਸਰਗਰਮੀਆਂ ਨੂੰ ਟ੍ਰੈਕ ਕਰਨ ਦੇ ਤਰੀਕੇ ਨੂੰ ਪੂਰੀ ਤਰ੍ਹਾਂ ਬਦਲ ਚੁੱਕਾ ਹੈ। ਹਰ ਚੀਜ਼ ਇੱਕ ਥਾਂ ਤੇ ਹੋਣ ਕਾਰਨ ਮੇਰਾ ਰੈਜ਼ਿਊਮੇ ਬਣਾਉਣਾ ਬਹੁਤ ਆਸਾਨ ਹੋ ਗਿਆ!"
+          </p>
+        </div>
+        <div className="flex items-center gap-4 pt-4">
+          <Image
+            src="/placeholder.svg?height=40&width=40"
+            alt="Student"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <div>
+            <p className="font-medium">Taranvir Kaur</p>
+            <p className="text-sm text-muted-foreground">Computer Science, Senior</p>
           </div>
-        </section>
+        </div>
+      </div>
+      <div className="flex flex-col justify-between rounded-lg border bg-background p-6 shadow-sm">
+        <div className="space-y-4">
+          <p className="text-muted-foreground text-2xl">
+            "ਮੈਂ ਪਹਿਲਾਂ ਆਪਣੀਆਂ ਐਕਸਟਰਾ ਸਰਗਰਮੀਆਂ ਦੇ ਸਰਟੀਫਿਕੇਟ ਗੁਆ ਲੈਂਦਾ ਸੀ। ਹੁਣ ਮੈਂ ਉਹਨਾਂ ਨੂੰ ਤੁਰੰਤ ਅਪਲੋਡ ਕਰ ਸਕਦਾ ਹਾਂ ਅਤੇ ਜਦੋਂ ਚਾਹੀਦਾ ਹੋਵੇ ਤਦ ਐਕਸੈੱਸ ਕਰ ਸਕਦਾ ਹਾਂ।"
+          </p>
+        </div>
+        <div className="flex items-center gap-4 pt-4">
+          <Image
+            src="/placeholder.svg?height=40&width=40"
+            alt="Student"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <div>
+            <p className="font-medium">Ravjot Singh</p>
+            <p className="text-sm text-muted-foreground">Business Administration, Junior</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* FAQ Section */}
         <section id="faq" className="w-full py-12 md:py-24 lg:py-32 bg-background">
@@ -260,41 +259,17 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-primary text-primary-foreground">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Ready to Get Started?</h2>
-                <p className="mx-auto max-w-[700px] md:text-xl">
-                  Join thousands of students who are already tracking their academic journey more effectively.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" variant="secondary" className="gap-1">
-                  Sign Up Now <ChevronRight className="h-4 w-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10"
-                >
-                  Request Demo
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
+       
       </main>
 
       <footer className="w-full border-t bg-background py-6 md:py-10">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row px-4 md:px-6">
           <div className="flex items-center gap-2">
             <GraduationCap className="h-6 w-6" />
-            <span className="text-lg font-bold">StudentHub</span>
+            <span className="text-lg font-bold">EduFlow</span>
           </div>
           <p className="text-center text-sm text-muted-foreground md:text-left">
-            &copy; {new Date().getFullYear()} StudentHub. All rights reserved.
+            &copy; {new Date().getFullYear()} EduFlow. All rights reserved.
           </p>
           <div className="flex gap-4">
             <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
