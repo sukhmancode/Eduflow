@@ -5,32 +5,19 @@ import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
-interface Class {
-  id: string;
-  Cname: string;
-}
-
-export default function UploadAssignment() {
+export default function PostNotice() {
   const router = useRouter();
   const [teacherID, setTeacherID] = useState<string | null>(null);
   const [teacherName, setTeacherName] = useState<string | null>(null);
   const [title, setTitle] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [classId, setClassId] = useState("");
-  const [file, setFile] = useState<File | null>(null);
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
-  const [classes, setClasses] = useState<Class[]>([]);
 
   useEffect(() => {
     setIsClient(true);
@@ -62,36 +49,20 @@ export default function UploadAssignment() {
       }
     };
 
-    const fetchClasses = async () => {
-      try {
-        const response = await fetch(
-          `https://ai-teacher-api-xnd1.onrender.com/teacher/${teacherID}/classes`
-        );
-
-        if (!response.ok) throw new Error("Failed to fetch classes");
-
-        const data = await response.json();
-        setClasses(data);
-      } catch (error) {
-        console.error("Error fetching classes:", error);
-      }
-    };
-
     fetchTeacherDetails();
-    fetchClasses();
   }, [teacherID]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      setFile(event.target.files[0]);
+      setImage(event.target.files[0]);
     } else {
-      toast.error("Please select a file!");
+      toast.error("Please select an image!");
     }
   };
 
-  const handleUpload = async () => {
-    if (!title || !dueDate || !classId || !file) {
-      toast.error("All fields are required!");
+  const handlePostNotice = async () => {
+    if (!title || !description) {
+      toast.error("Title and description are required!");
       return;
     }
 
@@ -104,28 +75,27 @@ export default function UploadAssignment() {
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("due_date", dueDate);
+    formData.append("description", description);
     formData.append("teacher_id", teacherID);
-    formData.append("class_id", classId);
-    formData.append("file", file);
+    if (image) formData.append("image", image);
 
     try {
       const response = await fetch(
-        "https://ai-teacher-api-xnd1.onrender.com/teacher/add_assignment",
+        "https://ai-teacher-api-xnd1.onrender.com/teacher/post_notice",
         {
           method: "POST",
           body: formData,
         }
       );
 
-      if (!response.ok) throw new Error("Error uploading assignment.");
+      if (!response.ok) throw new Error("Error posting notice.");
 
       await response.json();
-      toast.success("Assignment uploaded successfully!");
-      router.push("/dashboard/teacher/assignments");
+      toast.success("Notice posted successfully!");
+      router.push("/dashboard/teacher/notices");
     } catch (error) {
-      toast.error("Error uploading assignment.");
-      console.error("Upload error:", error);
+      toast.error("Error posting notice.");
+      console.error("Post error:", error);
     } finally {
       setLoading(false);
     }
@@ -133,69 +103,44 @@ export default function UploadAssignment() {
 
   if (!isClient) return null;
 
-  if (!teacherID) {
-    router.push("/");
-    toast.success("Teacher ID not found");
-  }
-
   return (
     <div className="flex justify-center items-center self-center">
-      <Card className=" w-full md:w-[500px] shadow-lg border border-gray-200 p-4">
-        <CardHeader></CardHeader>
+      <Card className="w-full md:w-[500px] shadow-2xl  border border-gray-200 p-6">
+        <CardHeader />
         <CardContent className="space-y-4">
           {teacherName && (
-            <p className="font-semibold text-2xl text-secondary">
-              <span className="font-semibold text-secondary">Teacher:</span>{" "}
+            <p className="font-semibold text-2xl text-primary">
+              <span className="font-semibold text-primary">Teacher:</span>{" "}
               {teacherName}
             </p>
           )}
-          <div className="flex flex-col gap-1 ">
-            <Label className="">Assigment title</Label>
+          <div className="flex flex-col gap-1">
+            <Label>Notice Title</Label>
             <Input
               type="text"
-              placeholder="Enter assignment title"
+              placeholder="Enter notice title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-1 ">
-            <Label className="">Due Date</Label>
-            <Input
-              type="date"
-              placeholder="Due Date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
+          <div className="flex flex-col gap-1">
+            <Label>Description</Label>
+            <Textarea
+              placeholder="Enter notice description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={5}
             />
           </div>
-
-          <div className="flex flex-col gap-1 ">
-            <Label>Select Class</Label>
-            <Select onValueChange={(value) => setClassId(value)}>
-              <SelectTrigger className="w-full p-2 border border-gray-300 rounded-md">
-                <SelectValue placeholder="Select a class" />
-              </SelectTrigger>
-              <SelectContent>
-                {classes.map((cls) => (
-                  <SelectItem
-                    className="bg-black/10 hover:bg-black"
-                    key={cls.id}
-                    value={cls.id}
-                  >
-                    {cls.Cname}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-col gap-1 ">
-            <Label className="mb-1">Upload Assignment</Label>
+          <div className="flex flex-col gap-1">
+            <Label className="mb-1">Upload Image (optional)</Label>
             <Input type="file" onChange={handleFileChange} />
             <Button
-              onClick={handleUpload}
+              onClick={handlePostNotice}
               className="w-full mt-3"
               disabled={loading}
             >
-              {loading ? "Uploading..." : "Upload Assignment"}
+              {loading ? "Posting..." : "Post Notice"}
             </Button>
           </div>
         </CardContent>

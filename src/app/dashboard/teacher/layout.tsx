@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Menu, PersonStandingIcon } from "lucide-react";
+import { BookOpen, GraduationCap, Menu, PersonStandingIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,18 +24,17 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     : "student";
 
   return (
-    <div className="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] dark">
+    <div className="min-h-screen w-full grid md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       {/* Sidebar */}
-      <div className="hidden md:block border-r ">
+      <div className="hidden md:block border border-r-2">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/dashboard" className="flex gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 self-center">
-                <BookOpen className="h-5 w-5 text-secondary" />
-              </div>
-              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600 mt-2">
-                EduFlow
-              </span>
+            
+              <div className="flex items-center gap-2">
+            <GraduationCap className="h-6 w-6" />
+            <span className="text-xl font-bold">EduFlow</span>
+          </div>
             </Link>
           </div>
           <div className="flex-1">
@@ -48,7 +47,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
       {/* Main Content */}
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+        <header className="flex h-14 items-center gap-4 border-b bg-primary  px-4 lg:h-[60px] lg:px-6">
           {/* Mobile Sidebar Button */}
           <Sheet>
             <SheetTrigger asChild>

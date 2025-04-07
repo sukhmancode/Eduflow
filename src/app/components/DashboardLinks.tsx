@@ -105,15 +105,15 @@ export const DashboardLinks = ({ role }: DashboardLinksProps) => {
   const links = role === "student" ? studentLinks : teacherLinks;
 
   return (
-    <div>
+    <div >
       <h2 className="text-lg font-bold mb-2">{role === "student" ? "Student Dashboard" : "Teacher Dashboard"}</h2>
       {links.map((link) => (
         <Link
           key={link.id}
           href={link.href}
           className={`${cn(
-            pathname === link.href ? "text-secondary bg-primary/10" : "text-muted-foreground hover:text-secondary"
-          )} flex items-center gap-3 p-2 rounded-lg transition-all hover:text-primary`}
+            pathname === link.href ? "text-secondary bg-primary/100" : "text-muted-foreground hover:text-black"
+          )} flex items-center gap-3 p-2 rounded-lg transition-all  `}
         >
           <link.icon className="size-4" />
           <p className="text-xl">{link.name}</p>

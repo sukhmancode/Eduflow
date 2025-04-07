@@ -73,17 +73,16 @@ export default function Classes() {
     <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="w-full">
         {teacherName && (
-          <div className="mb-4 p-4 text-bold text-3xl text-white
-           border-indigo-500 shadow-sm rounded">
-            <h2 className="text-3xl text-white
-           border-indigo-500 shadow-sm rounded font-bold uppercase">Welcome, {teacherName}</h2>
+          <div className="mb-4 p-4 text-bold text-3xl text-white shadow-sm rounded">
+            <h2 className="text-3xl text-black p-5
+   rounded font-bold uppercase">Welcome, {teacherName}</h2>
           </div>
         )}
 
         <div className="flex flex-wrap gap-4">
           {classes.length > 0 ? (
             classes.map((cls) => (
-              <Card key={cls.id} className="shadow-lg border bg-[#404040] border-gray-200">
+              <Card key={cls.id} className="shadow-lg border bg-secondary border-gray-200">
                 <CardHeader     />
                 <CardContent className="flex gap-4 flex-col">
                   <p className="text-2xl font-semibold">{cls.Cname}</p>

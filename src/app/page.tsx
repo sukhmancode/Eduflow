@@ -1,7 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Award, BookOpen, ChevronRight, FileText, GraduationCap, LayoutDashboard, Medal, Upload } from "lucide-react"
+import {  ChevronRight, GraduationCap} from "lucide-react"
 import { BackgroundPaths } from "./components/hero"
 import { LoginDialog } from "./components/LoginPopup"
 

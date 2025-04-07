@@ -2,7 +2,7 @@
 import React from "react";
 import { SideBarData } from "../data/SideBar";
 import Link from "next/link";
-import { BookOpen, X } from "lucide-react";
+import { BookOpen, GraduationCap, X } from "lucide-react";
 import "../styles/sidebar.scss";
 interface Props {
   visible?: boolean;
@@ -17,12 +17,10 @@ export default function Sidebar({ visible, onclose }: Props) {
         }  `}
       >
         <div className="sidebar-header">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-purple-600">
-            <BookOpen className="h-5 w-5 text-white" />
+        <div className="flex items-center gap-2">
+            <GraduationCap className="h-6 w-6" />
+            <span className="text-xl font-bold">EduFlow</span>
           </div>
-          <span className="sidebar-comapany-name text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600 mt-2">
-            EduFlow
-          </span>
           <span className="cross" onClick={onclose}>
             <X />
           </span>
@@ -33,7 +31,7 @@ export default function Sidebar({ visible, onclose }: Props) {
             return (
               <div className="sidebar-container-link" key={index}>
                 <Link
-                  className="text-muted-foreground hover:text-foreground flex items-center gap-3 p-2 rounded-lg transition-all hover:text-primary"
+                  className="text-muted-foreground  flex items-center gap-3 p-2 rounded-lg transition-all hover:text-secondary"
                   href={data.href}
                   onClick={onclose}
                 >
