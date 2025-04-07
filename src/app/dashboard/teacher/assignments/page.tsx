@@ -144,8 +144,8 @@ export default function UploadAssignment() {
         <CardHeader></CardHeader>
         <CardContent className="space-y-4">
           {teacherName && (
-            <p className="font-semibold text-2xl text-white">
-              <span className="font-semibold text-white">Teacher:</span>{" "}
+            <p className="font-semibold text-2xl text-secondary">
+              <span className="font-semibold text-secondary">Teacher:</span>{" "}
               {teacherName}
             </p>
           )}

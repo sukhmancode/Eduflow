@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 
 export default async function DashboardLayout({children}: {children : ReactNode}) {
-    return (
+        return (
         <>
                 <main className="flex flex-col ">
                     {children}

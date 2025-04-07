@@ -83,7 +83,7 @@ export default function Chatbot() {
         </Button>
 
         {response && (
-          <div className="mt-4 p-3 border rounded text-white text-sm whitespace-pre-line min-h-[50px]">
+          <div className="mt-4 p-3 border rounded text-secondary text-sm whitespace-pre-line min-h-[50px]">
             {response}
             {typing && <span className="animate-pulse ml-1">|</span>}
           </div>

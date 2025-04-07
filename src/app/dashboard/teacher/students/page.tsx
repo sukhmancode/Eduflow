@@ -78,7 +78,7 @@ export default function StudentAssignments() {
                     student.assignments.map((assignment, index) => (
                       <li
                         key={index}
-                        className="text-sm p-2 rounded bg-gray-700 text-white"
+                        className="text-sm p-2 rounded bg-gray-700 text-secondary"
                       >
                         <div className="flex justify-between items-center">
                           <span className="font-semibold">{assignment.title}</span>
