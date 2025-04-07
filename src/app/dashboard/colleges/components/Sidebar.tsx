@@ -17,7 +17,7 @@ export default function Sidebar({ visible, onclose }: Props) {
         }  `}
       >
         <div className="sidebar-header">
-        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <GraduationCap className="h-6 w-6" />
             <span className="text-xl font-bold">EduFlow</span>
           </div>
@@ -31,7 +31,7 @@ export default function Sidebar({ visible, onclose }: Props) {
             return (
               <div className="sidebar-container-link" key={index}>
                 <Link
-                  className="text-muted-foreground  flex items-center gap-3 p-2 rounded-lg transition-all hover:text-secondary"
+                  className="text-muted-foreground  flex items-center gap-3 p-2 rounded-lg transition-all hover:text-primary"
                   href={data.href}
                   onClick={onclose}
                 >

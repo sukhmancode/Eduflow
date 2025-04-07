@@ -18,7 +18,9 @@ interface NavProps {
   id: number;
   name: string;
   href: string;
-  icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
 }
 
 // Student Links
@@ -27,7 +29,7 @@ export const studentLinks: NavProps[] = [
     id: 4,
     name: "Home",
     href: "/dashboard/student",
-    icon: LayoutDashboardIcon
+    icon: LayoutDashboardIcon,
   },
   {
     id: 0,
@@ -61,7 +63,7 @@ export const teacherLinks: NavProps[] = [
     id: 4,
     name: "Home",
     href: "/dashboard/teacher",
-    icon: LayoutDashboardIcon
+    icon: LayoutDashboardIcon,
   },
   {
     id: 0,
@@ -80,7 +82,7 @@ export const teacherLinks: NavProps[] = [
     id: 2,
     name: "View Profile",
     href: "/dashboard/teacher/profile",
-    icon: GraduationCap, 
+    icon: GraduationCap,
   },
   {
     id: 3,
@@ -105,14 +107,16 @@ export const DashboardLinks = ({ role }: DashboardLinksProps) => {
   const links = role === "student" ? studentLinks : teacherLinks;
 
   return (
-    <div >
-      <h2 className="text-lg font-bold mb-2">{role === "student" ? "Student Dashboard" : "Teacher Dashboard"}</h2>
+    <div>
+      <h2 className="text-lg font-bold mb-2">
+        {role === "student" ? "Student Dashboard" : "Teacher Dashboard"}
+      </h2>
       {links.map((link) => (
         <Link
           key={link.id}
           href={link.href}
           className={`${cn(
-            pathname === link.href ? "text-secondary bg-primary/100" : "text-muted-foreground hover:text-black"
+            "text-muted-foreground hover:text-black"
           )} flex items-center gap-3 p-2 rounded-lg transition-all  `}
         >
           <link.icon className="size-4" />

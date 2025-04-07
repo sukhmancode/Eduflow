@@ -62,18 +62,25 @@ export default function Profile() {
     <div className="max-w-[500px] mx-auto p-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl text-white text-center">{student.Sname}</CardTitle>
-          <CardDescription className="text-2xl text-center">Student ID: {student.id}</CardDescription>
+          <CardTitle className="text-2xl text-black text-center">
+            {student.Sname}
+          </CardTitle>
+          <CardDescription className="text-2xl text-center">
+            Student ID: {student.id}
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2 text-sm">
           <div>
-            <strong className="text-xl" >Email:</strong> <span className="text-xl">{student.Semail}</span>
+            <strong className="text-xl">Email:</strong>{" "}
+            <span className="text-xl">{student.Semail}</span>
           </div>
           <div>
-            <strong className="text-xl" >Contact:</strong> <span className="text-xl">{student.Scontact}</span>
+            <strong className="text-xl">Contact:</strong>{" "}
+            <span className="text-xl">{student.Scontact}</span>
           </div>
           <div>
-            <strong className="text-xl" >College ID:</strong> <span className="text-xl">{student.college_id}</span>
+            <strong className="text-xl">College ID:</strong>{" "}
+            <span className="text-xl">{student.college_id}</span>
           </div>
         </CardContent>
       </Card>
