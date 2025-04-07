@@ -99,7 +99,7 @@ export default function LandingPage() {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Benefits</div>
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Why Choose StudentHub?</h2>
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Why Choose EduFlow?</h2>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed">
                     Our platform offers numerous advantages for students, faculty, and institutions.
                   </p>
@@ -270,17 +270,6 @@ export default function LandingPage() {
           <p className="text-center text-sm text-muted-foreground md:text-left">
             &copy; {new Date().getFullYear()} EduFlow. All rights reserved.
           </p>
-          <div className="flex gap-4">
-            <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
-              Terms
-            </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
-              Privacy
-            </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-foreground">
-              Contact
-            </Link>
-          </div>
         </div>
       </footer>
     </div>

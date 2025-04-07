@@ -47,7 +47,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
       {/* Main Content */}
       <div className="flex flex-col">
-        <header className="flex h-14 items-center gap-4 bg-white border border-1 px-4 lg:h-[60px] lg:px-6">
+        <header className="flex h-14 items-center gap-4 bg-white border-1 px-4 lg:h-[60px] lg:px-6">
           {/* Mobile Sidebar Button */}
           <Sheet>
             <SheetTrigger asChild>
