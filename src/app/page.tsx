@@ -115,9 +115,9 @@ export default function LandingPage() {
                 <Image
                   src="/dashboard.png"
                   alt="Students using the platform"
-                  width={550}
-                  height={550}
-                  className="rounded-lg object-cover"
+                  width={750}
+                  height={750}
+                  className="rounded-md object-cover"
                 />
               </div>
               <div className="flex flex-col justify-center space-y-4">
