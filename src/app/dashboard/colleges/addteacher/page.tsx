@@ -10,6 +10,7 @@ import "../styles/index.scss";
 import "../styles/sidebar.scss";
 import "../styles/addteacher.scss";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
 
 export default function Page() {
   const [collegeId, setCollegeId] = useState<string | null>();
@@ -160,9 +161,9 @@ export default function Page() {
                     required
                   />
                 </div>
-                <button type="submit" disabled={loading} className="add-button">
+                <Button type="submit" disabled={loading} className="w-full ">
                   {loading ? "Adding..." : "Add Teacher"}
-                </button>
+                </Button>
               </form>
             </div>
           </div>

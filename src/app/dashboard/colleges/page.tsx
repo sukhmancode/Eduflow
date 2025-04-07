@@ -76,7 +76,7 @@ export default function page() {
                 secondaryHeading="Total Number of Teachers "
                 number={teachers}
                 secondary=" Teachers"
-                href={"/viewteachers"}
+                href={"/dashboard/colleges/viewteachers"}
               />
             </div>
           </div>

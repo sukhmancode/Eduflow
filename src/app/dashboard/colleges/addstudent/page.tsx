@@ -9,6 +9,7 @@ import "../styles/index.scss";
 import "../styles/sidebar.scss";
 import "../styles/addteacher.scss";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
 
 interface Data {
   id: string | number;
@@ -152,7 +153,7 @@ export default function page() {
                     <input
                       type="number"
                       id="snumber"
-                      placeholder="+x xxxxx-xx"
+                      placeholder="+91 98145-90391"
                       className="bg-secondary "
                       ref={pnumber}
                       required
@@ -169,13 +170,9 @@ export default function page() {
                       required
                     />
                   </div>
-                  <button
-                    type="submit"
-                    disabled={loading ? true : false}
-                    className="add-button"
-                  >
-                    {loading ? "Adding..." : "Add Student"}
-                  </button>
+                  <Button type="submit" disabled={loading} className="w-full ">
+                  {loading ? "Adding..." : "Add Student"}
+                </Button>
                 </form>
               </div>
             </div>
