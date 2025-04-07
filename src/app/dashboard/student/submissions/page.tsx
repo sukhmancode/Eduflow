@@ -14,9 +14,18 @@ interface Submission {
   feedback: string | null;
 }
 
+interface Assignment {
+  id: number;
+  title: string;
+  cloudinary_url: string;
+  due_date: string;
+  Cname: string;
+}
+
 export default function Submissions() {
   const [studentId, setStudentId] = useState<string | null>(null);
   const [submissions, setSubmissions] = useState<Submission[]>([]);
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [loading, setLoading] = useState(true);
   const [feedbackState, setFeedbackState] = useState<{ [sub_id: number]: string }>({});
   const [visible, setVisible] = useState<{ [sub_id: number]: boolean }>({});
@@ -27,16 +36,22 @@ export default function Submissions() {
     if (!id) return;
     setStudentId(id);
 
-    axios
-      .get(`https://ai-teacher-api-xnd1.onrender.com/student/submissions/${id}`)
-      .then(({ data }) => {
-        setSubmissions(data);
+    const fetchData = async () => {
+      try {
+        const [subsRes, assignRes] = await Promise.all([
+          axios.get(`https://ai-teacher-api-xnd1.onrender.com/student/submissions/${id}`),
+          axios.get(`https://ai-teacher-api-xnd1.onrender.com/student/assignments/${id}`),
+        ]);
+        setSubmissions(subsRes.data);
+        setAssignments(assignRes.data);
+      } catch (err) {
+        console.error("Failed to load data", err);
+      } finally {
         setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        console.error("Failed to load submissions");
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   const typeFeedback = (sub_id: number, text: string) => {
@@ -56,10 +71,9 @@ export default function Submissions() {
   };
 
   const getOrGenerateFeedback = async (submission: Submission) => {
-    const { assignment_id, sub_id, feedback, cloudinary_url } = submission;
+    const { assignment_id, sub_id, feedback } = submission;
     if (!studentId) return;
 
-    // If already fetched, toggle visibility
     if (feedbackState[sub_id]) {
       setVisible((prev) => ({
         ...prev,
@@ -73,7 +87,6 @@ export default function Submissions() {
 
       let finalFeedback = feedback;
 
-      // If no feedback exists, generate one
       if (!feedback) {
         const { data } = await axios.get(
           `https://ai-teacher-api-xnd1.onrender.com/student/FeedBack/${studentId}/${assignment_id}/${sub_id}`
@@ -98,6 +111,11 @@ export default function Submissions() {
     }
   };
 
+  const getAssignmentTitle = (assignmentId: number) => {
+    const assignment = assignments.find((a) => a.id === assignmentId);
+    return assignment ? assignment.title : `Assignment ${assignmentId}`;
+  };
+
   if (loading) {
     return <p className="text-center text-gray-500">Loading submissions...</p>;
   }
@@ -112,12 +130,9 @@ export default function Submissions() {
         {submissions.map((submission) => (
           <Card key={submission.sub_id} className="border border-gray-200 shadow-sm">
             <CardHeader>
-              <CardTitle>Submission ID: {submission.sub_id}</CardTitle>
+              <CardTitle>Assignment: {getAssignmentTitle(submission.assignment_id)}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <p>
-                <strong>Assignment ID:</strong> {submission.assignment_id}
-              </p>
               <p>
                 <strong>Submitted At:</strong>{" "}
                 {new Date(submission.submitted_at).toLocaleString()}

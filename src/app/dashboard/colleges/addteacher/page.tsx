@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -13,83 +10,78 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 
 export default function Page() {
-  const [collegeId, setCollegeId] = useState<string | null>();
-  const [collegeName, setCollegeName] = useState<string>();
-  const idRef = useRef<HTMLInputElement | null>(null);
-  const nameRef = useRef<HTMLInputElement | null>(null);
-  const passRef = useRef<HTMLInputElement | null>(null);
-  const email = useRef<HTMLInputElement | null>(null);
-  const number = useRef<HTMLInputElement | null>(null);
-
+  const [collegeId, setCollegeId] = useState<string | null>(null);
+  const [collegeName, setCollegeName] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleFormSubmit = async (e: any) => {
+  const idRef = useRef<HTMLInputElement | null>(null);
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const phoneRef = useRef<HTMLInputElement | null>(null);
+  const passRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    const storedCollegeId = sessionStorage.getItem("collegeId");
+    setCollegeId(storedCollegeId);
+
+    if (storedCollegeId) {
+      axios
+        .get(`https://ai-teacher-api-xnd1.onrender.com/college/${storedCollegeId}/details`)
+        .then(({ data }) => setCollegeName(data.Colname))
+        .catch(() => console.log("Error fetching college details"));
+    }
+  }, []);
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     if (
       idRef.current &&
       nameRef.current &&
+      emailRef.current &&
+      phoneRef.current &&
       passRef.current &&
-      collegeId &&
-      email.current &&
-      number.current
+      collegeId
     ) {
-      try {
-        const payload = {
-          id: parseInt(idRef.current.value),
-          Sname: nameRef.current.value,
-          Spass: passRef.current.value,
-          college_id: parseInt(collegeId),
-          Scontact: parseInt(number.current.value),
-          Semail: email.current.value,
-        };
+      const payload = {
+        id: parseInt(idRef.current.value),
+        Tname: nameRef.current.value,
+        Temail: emailRef.current.value,
+        Tcontact: phoneRef.current.value,
+        Tpass: passRef.current.value,
+        college_id: parseInt(collegeId),
+      };
 
+      try {
         const response = await axios.post(
-          "https://ai-teacher-api-xnd1.onrender.com/college/add_student/",
+          "https://ai-teacher-api-xnd1.onrender.com/college/add_teacher/",
           payload
         );
 
         if (response.status === 200 && response.data.Message === "Success") {
-          alert("Student added successfully!");
+          alert("Teacher added successfully!");
 
+          // Clear inputs
           idRef.current.value = "";
           nameRef.current.value = "";
+          emailRef.current.value = "";
+          phoneRef.current.value = "";
           passRef.current.value = "";
-          email.current.value = "";
-          number.current.value = "";
         } else {
-          alert("Failed to add student. Please check the data.");
+          alert("Failed to add teacher.");
         }
       } catch (err) {
         console.error(err);
-        alert("Something went wrong while adding the student.");
+        alert("Something went wrong.");
       } finally {
         setLoading(false);
       }
     } else {
-      alert("Please fill all required fields.");
+      alert("Please fill in all fields.");
       setLoading(false);
     }
   };
-
-  const handleCollegeDetails = (collegeId: string) => {
-    const url = `https://ai-teacher-api-xnd1.onrender.com/college/${collegeId}/details`;
-    axios
-      .get(url)
-      .then(({ data }) => {
-        setCollegeName(data.Colname);
-      })
-      .catch(() => {
-        console.log("error");
-      });
-  };
-
-  useEffect(() => {
-    const storedCollegeId = sessionStorage.getItem("collegeId");
-    setCollegeId(storedCollegeId);
-    if (storedCollegeId) handleCollegeDetails(storedCollegeId);
-  }, []);
 
   return (
     <div className="add-teacher-container flex">
@@ -107,61 +99,31 @@ export default function Page() {
               <h2 className="p-3 pl-5 text-2xl font-bold">Add Teacher</h2>
               <form className="add-teacher-form" onSubmit={handleFormSubmit}>
                 <div className="input-wrapper">
-                  <label htmlFor="sid">Teacher ID:</label>
-                  <input
-                    type="number"
-                    id="sid"
-                    placeholder="Teacher ID"
-                    className="bg-secondary"
-                    ref={idRef}
-                    required
-                  />
+                  <label htmlFor="tid">Teacher ID:</label>
+                  <input type="number" id="tid" ref={idRef} className="bg-secondary" required />
                 </div>
+
                 <div className="input-wrapper">
-                  <label htmlFor="sname">Teacher Name:</label>
-                  <input
-                    type="text"
-                    id="sname"
-                    placeholder="Teacher Name"
-                    className="bg-secondary"
-                    ref={nameRef}
-                    required
-                  />
+                  <label htmlFor="tname">Teacher Name:</label>
+                  <input type="text" id="tname" ref={nameRef} className="bg-secondary" required />
                 </div>
+
                 <div className="input-wrapper">
-                  <label htmlFor="sname">Teacher Email:</label>
-                  <input
-                    type="text"
-                    id="sname"
-                    placeholder="Teacher Email"
-                    className="bg-secondary"
-                    ref={nameRef}
-                    required
-                  />
+                  <label htmlFor="temail">Teacher Email:</label>
+                  <input type="email" id="temail" ref={emailRef} className="bg-secondary" required />
                 </div>
+
                 <div className="input-wrapper">
-                  <label htmlFor="sname">Teacher Contact:</label>
-                  <input
-                    type="number"
-                    id="sname"
-                    placeholder="Teacher Phone Number"
-                    className="bg-secondary"
-                    ref={nameRef}
-                    required
-                  />
+                  <label htmlFor="tphone">Teacher Contact:</label>
+                  <input type="text" id="tphone" ref={phoneRef} className="bg-secondary" required />
                 </div>
+
                 <div className="input-wrapper">
-                  <label htmlFor="spass">Teacher Password:</label>
-                  <input
-                    type="password"
-                    id="spass"
-                    placeholder="Password"
-                    className="bg-secondary"
-                    ref={passRef}
-                    required
-                  />
+                  <label htmlFor="tpass">Teacher Password:</label>
+                  <input type="password" id="tpass" ref={passRef} className="bg-secondary" required />
                 </div>
-                <Button type="submit" disabled={loading} className="w-full ">
+
+                <Button type="submit" disabled={loading} className="w-full mt-4">
                   {loading ? "Adding..." : "Add Teacher"}
                 </Button>
               </form>

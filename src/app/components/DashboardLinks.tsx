@@ -10,6 +10,7 @@ import {
   LayoutDashboardIcon,
   Bot,
   MessageCircle,
+  FileIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -54,6 +55,18 @@ export const studentLinks: NavProps[] = [
     name: "ChatBot",
     href: "/dashboard/student/chatbot",
     icon: Bot, // 📊 Reports Icon
+  },
+  {
+    id: 4,
+    name: "View MST",
+    href: "/dashboard/student/viewmst",
+    icon: FileIcon, // 📊 Reports Icon
+  },
+  {
+    id: 5,
+    name: "Calculate SGPA",
+    href: "/dashboard/student/sgpa",
+    icon: FileIcon, // 📊 Reports Icon
   },
 ];
 
