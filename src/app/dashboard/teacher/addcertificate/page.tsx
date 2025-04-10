@@ -17,12 +17,13 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import Image from "next/image";
-import html2canvas from "html2canvas";
+import domToImage from "dom-to-image-more";
 
 export default function CertificateGenerator() {
-  const [name, setName] = useState("");
-  const [rollNo, setRollNo] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [rollNo, setRollNo] = useState<string>("");
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const certRef = useRef<HTMLDivElement>(null);
 
   const handleGenerate = () => {
@@ -32,47 +33,42 @@ export default function CertificateGenerator() {
       toast.error("Please fill out both fields.");
     }
   };
-  const handleDownloadAsImage = async () => {
-    if (!certRef.current) return;
-  
-    // Optional: Fix any unsupported color formats before rendering
-    const fixColors = (element: HTMLElement) => {
-      const all = element.querySelectorAll("*");
-      all.forEach((el) => {
-        const style = window.getComputedStyle(el);
-        if (style.color.includes("oklch")) {
-          (el as HTMLElement).style.color = "#000";
-        }
-        if (style.backgroundColor.includes("oklch")) {
-          (el as HTMLElement).style.backgroundColor = "#fff";
-        }
-      });
-    };
-  
-    fixColors(certRef.current);
-  
-    const canvas = await html2canvas(certRef.current);
-  
-    // Convert canvas to blob instead of data URL
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        toast.error("Failed to generate image.");
-        return;
+
+  const fixColors = (element: HTMLElement) => {
+    const all = element.querySelectorAll("*");
+    all.forEach((el) => {
+      const style = window.getComputedStyle(el);
+      if (style.color.includes("oklch")) {
+        (el as HTMLElement).style.color = "#000";
       }
-  
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${name}_Certificate.png`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }, "image/png");
+      if (style.backgroundColor.includes("oklch")) {
+        (el as HTMLElement).style.backgroundColor = "#fff";
+      }
+    });
   };
-  
+
+  const handleDownloadAsImage = async (): Promise<void> => {
+    const element = certRef.current;
+    if (!element) return;
+
+    setLoading(true);
+    try {
+      fixColors(element); // Patch unsupported CSS colors
+      const dataUrl: string = await domToImage.toPng(element);
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `${name}_Certificate.png`;
+      link.click();
+    } catch (error) {
+      console.error("Image generation failed:", error);
+      toast.error("Failed to generate certificate.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="max-w-2xl mx-auto mt-10 space-y-6">
+    <div className="max-w-2xl mx-auto mt-10 space-y-6 px-4">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Certificate Generator</CardTitle>
@@ -105,14 +101,14 @@ export default function CertificateGenerator() {
 
           <div
             ref={certRef}
-            className="bg-white p-10 border rounded-xl text-center"
-            style={{ color: "#000", backgroundColor: "#fff" }} // Safe styles
+            className="bg-white p-10 border-4 border-indigo-600 rounded-xl shadow-lg text-center"
+            style={{ color: "#000", backgroundColor: "#fff" }}
           >
             <Image
               src="/gne.jpg"
               width={100}
               height={100}
-              alt="gne logo"
+              alt="GNE Logo"
               className="mx-auto mb-4"
             />
             <h2 className="text-3xl font-bold text-indigo-700 mb-4">
@@ -124,10 +120,13 @@ export default function CertificateGenerator() {
             <p className="mt-4 text-gray-600">
               has successfully completed the requirements.
             </p>
+            <p className="mt-4 text-sm text-gray-500">
+              Date: {new Date().toLocaleDateString()}
+            </p>
           </div>
 
-          <Button className="mt-4 w-full" onClick={handleDownloadAsImage}>
-            Download as Image
+          <Button className="mt-4 w-full" onClick={handleDownloadAsImage} disabled={loading}>
+            {loading ? "Generating..." : "Download as Image"}
           </Button>
         </DialogContent>
       </Dialog>
